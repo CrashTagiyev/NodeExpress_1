@@ -1,0 +1,94 @@
+
+#TOdos -------------------------------
+
+# POST http://localhost:3000/toDos/create HTTP/1.1
+# content-type: application/json
+
+# {
+#     "title" : "last updated test",
+#     "description":"description of todo",
+#     "author" : "6725127dca98eb92ab9c481f",
+#     "isCompleted" : true
+# }
+
+# GET http://localhost:3000/toDos/ HTTP/1.1
+# content-type: application/json
+
+# GET http://localhost:3000/toDos/search/term?searchItem=t HTTP/1.1
+# content-type: application/json
+
+# {
+#     "isCompleted":true
+# }
+
+# PUT http://localhost:3000/toDos/update/67272121b35a3fad43a7d88a HTTP/1.1
+# content-type: application/json
+
+# {
+#     "title" : "updated completed",
+#     "description":"description of todo2",
+#     "author" : "6724a140cc8b0e64efe0c8e4"
+# }
+
+
+
+# DELETE http://localhost:3000/toDos/delete/6724ec80a0c9dc6e5a756144 HTTP/1.1
+# content-type: application/json
+
+#--------------------------------------------------
+
+
+
+# Auth requrest
+
+# POST http://localhost:3000/auth/register HTTP/1.1
+# content-type: application/json
+
+# {
+#         "userName" : "Crash",
+#         "firstName" : "Emil",
+#         "lastName" : "Tagiyev",
+#         "email" : "Emil@gmail.com",
+#         "password" : "123qwe"
+# }
+
+# GET http://localhost:3000/users HTTP/1.1
+# content-type: application/json
+
+
+GET http://localhost:3000/users/GetUsersToDosGt/term?count=1111 HTTP/1.1
+content-type: application/json
+
+
+
+
+# POST http://localhost:3000/auth/login HTTP/1.1
+# content-type: application/json
+
+# {
+#         "userName" : "Crash",
+#         "password" : "123qwe"
+# }
+
+# GET http://localhost:3000/auth/refresh HTTP/1.1
+# content-type: application/json
+
+# {
+#     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjUxMjdkY2E5OGViOTJhYjljNDgxZiIsImlhdCI6MTczMDQ4MjgzMSwiZXhwIjoxNzMwNTY5MjMxfQ.t9caAhS6ZiIOrjvT6tCYzwnOsI7-Vej6Cj3IHW7bPlA"
+# }
+
+
+# PUT http://localhost:3000/users/update/672497457bd57bbfe278d65b HTTP/1.1
+# content-type: application/json
+
+# {
+#     "userName":"Crash2",
+#     "firstName":"Emil2",
+#     "lastName":"Tagiyev2",
+#     "email" : "Emil2@gmail.com",
+#     "password" : "123qweA@"
+# }
+
+# DELETE  http://localhost:3000/users/delete/6724953c17c7df8e7feec07f HTTP/1.1
+# content-type: application/json
+
