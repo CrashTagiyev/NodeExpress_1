@@ -2,7 +2,6 @@ const express = require("express");
 const User = require("../models/userModel");
 const ToDo = require("../models/toDoModel");
 const route = express.Router();
-const GetUsersToDosCount = require("../utils/toDoUtils");
 
 route.get("/", async (req, res, next) => {
   const users = await User.find();
@@ -12,9 +11,8 @@ route.get("/", async (req, res, next) => {
 
 route.get("/GetUsersToDosGt/term", async (req, res, next) => {
   const users = await User.find();
-  const toDos = await ToDo.find();
   const count = parseInt(req.query.count, 10);
-  console.log(count)
+
   const filteredUsersPromises = users.map(async (user) => {
     const todoCount = await ToDo.countDocuments({ author: user._id });
     if (todoCount > count){
@@ -23,6 +21,7 @@ route.get("/GetUsersToDosGt/term", async (req, res, next) => {
     
   });
   const filteredUsers = await Promise.all(filteredUsersPromises);
+  
   res.json({ filteredUsers });
 });
 

@@ -25,7 +25,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLenght: 8
-  }
+  },
+
 });
 
 userSchema.pre(`save`, async function (next) {
@@ -38,11 +39,6 @@ userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual("todos", {
-  ref: "Todo",            
-  localField: "_id",    
-  foreignField: "author", 
-});
 
 const User = mongoose.model("User", userSchema);
 
