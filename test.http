@@ -14,6 +14,9 @@
 # GET http://localhost:3000/toDos/ HTTP/1.1
 # content-type: application/json
 
+GET http://localhost:3000/toDos?page=1&pageSize=5 HTTP/1.1
+content-type: application/json
+
 # GET http://localhost:3000/toDos/search/term?searchItem=t HTTP/1.1
 # content-type: application/json
 
@@ -56,8 +59,8 @@
 # content-type: application/json
 
 
-GET http://localhost:3000/users/GetUsersToDosGt/term?count=1111 HTTP/1.1
-content-type: application/json
+# GET http://localhost:3000/users/GetUsersToDosGt/term?count=1111 HTTP/1.1
+# content-type: application/json
 
 
 

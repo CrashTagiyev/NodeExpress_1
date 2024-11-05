@@ -2,11 +2,18 @@ const route = require("express").Router();
 const ToDo = require("../models/toDoModel");
 const url = require("url");
 
-
 route.get("/", async (req, res, next) => {
   try {
-    const toDos = await ToDo.find();
-    res.status(200).json({ toDos });
+    const { page = 1, pageSize = 10 } = req.query;
+    
+    const currentPage = parseInt(page);
+    const currentPageSize = parseInt(pageSize);
+    const toDosCount = await ToDo.countDocuments();
+    const skip = (currentPage - 1) * currentPageSize;
+    const totalPage = Math.ceil(toDosCount / currentPageSize)
+
+    const toDos = await ToDo.find().skip(skip).limit(pageSize);
+    res.status(200).json({ totalPage,currentPage,toDos });
   } catch (error) {
     console.error(error);
     res.status(500).send(`Internal server error`);
@@ -68,7 +75,7 @@ route.put("/update/:id", async (req, res, next) => {
     const updatedToDo = await ToDo.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    updatedToDo.save()
+    updatedToDo.save();
     if (!updatedToDo) res.status(404).send(`ToDo did not found`);
 
     res.status(203).send(`ToDo updated successfuly`);
