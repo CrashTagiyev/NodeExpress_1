@@ -14,8 +14,8 @@
 # GET http://localhost:3000/toDos/ HTTP/1.1
 # content-type: application/json
 
-GET http://localhost:3000/toDos?page=1&pageSize=5 HTTP/1.1
-content-type: application/json
+# GET http://localhost:3000/toDos?page=1&pageSize=5 HTTP/1.1
+# content-type: application/json
 
 # GET http://localhost:3000/toDos/search/term?searchItem=t HTTP/1.1
 # content-type: application/json
@@ -48,12 +48,14 @@ content-type: application/json
 # content-type: application/json
 
 # {
-#         "userName" : "Crash",
-#         "firstName" : "Emil",
-#         "lastName" : "Tagiyev",
-#         "email" : "Emil@gmail.com",
-#         "password" : "123qwe"
+#         "userName" : "admin",
+#         "firstName" : "admin",
+#         "lastName" : "admin",
+#         "email" : "admin@gmail.com",
+#         "password" : "123qwe",
+#         "isAdmin" : true
 # }
+
 
 # GET http://localhost:3000/users HTTP/1.1
 # content-type: application/json
@@ -69,13 +71,12 @@ content-type: application/json
 # content-type: application/json
 
 # {
-#         "userName" : "Crash",
+#         "userName" : "admin",
 #         "password" : "123qwe"
 # }
 
 # GET http://localhost:3000/auth/refresh HTTP/1.1
 # content-type: application/json
-
 # {
 #     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjUxMjdkY2E5OGViOTJhYjljNDgxZiIsImlhdCI6MTczMDQ4MjgzMSwiZXhwIjoxNzMwNTY5MjMxfQ.t9caAhS6ZiIOrjvT6tCYzwnOsI7-Vej6Cj3IHW7bPlA"
 # }
@@ -92,6 +93,93 @@ content-type: application/json
 #     "password" : "123qweA@"
 # }
 
-# DELETE  http://localhost:3000/users/delete/6724953c17c7df8e7feec07f HTTP/1.1
+# DELETE  http://localhost:3000/users/delete/6728503313215a6f1ca3ee86 HTTP/1.1
 # content-type: application/json
+
+
+
+
+
+
+#PRODUCT CRUD -----------------------------------------------------
+
+# POST http://localhost:3000/products/create HTTP/1.1
+# content-type: application/json
+# Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzViMGFhMGNlZDhlNWU3MDcwODA4MyIsImlhdCI6MTczMTU3MzcwOCwiZXhwIjoxNzMxNTc0NjA4fQ.HfBn1wvor5HLRtb-B3TwTcJ_33wObvj_0rC5H1vhLps
+
+# {
+#   "title": "Ayaqqabi",
+#   "description": "Qara rengde.Tep tezedi",
+#   "price": 30,
+#   "currency": "₼",
+#   "category": "Fashion",
+#   "stock": 1,
+#   "gallery": "https://img.freepik.com/free-photo/woman-leather-shoes_1203-8263.jpg?t=st=1731515704~exp=1731519304~hmac=485b6bac1c4730e71fad2032ec380316f024baacbe9f12eb7e3cbf8c8908386b&w=1380"
+# }
+
+# GET http://localhost:3000/products?pageSize=5&page=1 HTTP/1.1
+# content-type: application/json
+
+# PATCH http://localhost:3000/products/update/6734d7897f418274fc63b46a HTTP/1.1
+# content-type: application/json
+
+# {
+#    "title": "Ayaqqabi 2"
+# }
+
+
+# DELETE http://localhost:3000/products/DELETE/6734d7897f418274fc63b46a HTTP/1.1
+# content-type: application/json
+
+
+
+
+
+
+
+
+
+#Baskets CRUD -----------------------------------------------------
+
+# POST http://localhost:3000/baskets/create HTTP/1.1
+# content-type: application/json
+
+# {
+#     "totalPrice" : 200,
+#     "products" : [
+#         {
+#         "productId":"6735b7eb3199b3eaaef1c420",
+#         "quantity" : 1
+#         }
+#     ],
+#     "currency": "₼"
+# }
+
+GET http://localhost:3000/baskets/ HTTP/1.1
+content-type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzViMGFhMGNlZDhlNWU3MDcwODA4MyIsImlhdCI6MTczMTY3OTMzNSwiZXhwIjoxNzMxNzMzMzM1fQ.PPfUmjcqjCyd9bMLBPFZWV7zhRXrtxmFDy7DYQJdgr8
+
+# PATCH http://localhost:3000/baskets/update/6735ba10d6b4632a69552bcc HTTP/1.1
+# content-type: application/json
+# Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzViMGFhMGNlZDhlNWU3MDcwODA4MyIsImlhdCI6MTczMTU3MzcwOCwiZXhwIjoxNzMxNTc0NjA4fQ.HfBn1wvor5HLRtb-B3TwTcJ_33wObvj_0rC5H1vhLps
+
+# {
+    
+#    "totalPrice": 111
+# }
+
+# PATCH http://localhost:3000/baskets/addProduct/6734d08769c694e82ff780c4 HTTP/1.1
+# content-type: application/json
+# Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzViMGFhMGNlZDhlNWU3MDcwODA4MyIsImlhdCI6MTczMTY3OTMzNSwiZXhwIjoxNzMxNzMzMzM1fQ.PPfUmjcqjCyd9bMLBPFZWV7zhRXrtxmFDy7DYQJdgr8
+
+# {
+# "productId" : "6735b7eb3199b3eaaef1c420",
+#    "quantity": 2
+# }
+
+
+# DELETE http://localhost:3000/baskets/delete/6735ba10d6b4632a69552bcc HTTP/1.1
+# content-type: application/json
+# Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzViMGFhMGNlZDhlNWU3MDcwODA4MyIsImlhdCI6MTczMTU3NDcyMywiZXhwIjoxNzMxNjI4NzIzfQ.TJAvKltZTvFsXcGJqLzLEUIOdMsjq935BGRku8HEoWc
+
 

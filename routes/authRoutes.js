@@ -4,6 +4,7 @@ const formidable = require("formidable");
 const fs = require("fs");
 const route = express.Router();
 const {
+  verifyAccessToken,
   generateAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
@@ -12,13 +13,22 @@ const User = require("../models/userModel");
 
 route.post("/register", async (req, res, next) => {
   try {
-    const { userName, firstName, lastName, email, password } = req.body;
+    const {
+      userName,
+      firstName,
+      lastName,
+      email,
+      password,
+      isAdmin = false,
+    } = req.body;
     const newUser = new User({
       userName,
       firstName,
       lastName,
       email,
       password,
+      basket: null,
+      isAdmin,
     });
     await newUser.save();
 
@@ -29,7 +39,7 @@ route.post("/register", async (req, res, next) => {
   }
 });
 
-route.post("/login", async (req, res, next) => {
+route.post("/login", async (req, res) => {
   try {
     const { userName, password } = req.body;
     const user = await User.findOne({ userName });
@@ -44,7 +54,7 @@ route.post("/login", async (req, res, next) => {
   }
 });
 
-route.get("/refresh", async (req, res, next) => {
+route.get("/refresh", async (req, res) => {
   const refreshToken = req.body.refreshToken;
   const decodedToken = verifyRefreshToken(refreshToken);
   if (decodedToken) {
@@ -59,12 +69,12 @@ route.get("/refresh", async (req, res, next) => {
   }
 });
 
-route.post("/addImages", async (req, res, next) => {
+route.post("/addImages", async (req, res) => {
   try {
     const form = new formidable.IncomingForm();
 
     form.parse(req, async (err, fields, files) => {
-      if (files.profileImage[0] && files.profileImage[0].filepath)
+      if (files.profileImage[0] && files.profileImage[0].filepath) {
         files.profileImage.map((img) => {
           const imageData = fs.readFileSync(img.filepath);
 
@@ -75,7 +85,9 @@ route.post("/addImages", async (req, res, next) => {
 
           fs.writeFileSync(newPath, imageData);
         });
-      else throw new Error("file does not exist in the temp folder");
+        res.send("image added successfuly")
+      }
+       else throw new Error("file does not exist in the temp folder");
     });
   } catch (err) {
     console.error(err);

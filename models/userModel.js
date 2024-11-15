@@ -26,7 +26,14 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLenght: 8
   },
-
+  basket:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Basket",
+  },
+  isAdmin:{
+    type:Boolean,
+    default:false
+  }
 });
 
 userSchema.pre(`save`, async function (next) {
