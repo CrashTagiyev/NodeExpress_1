@@ -71,10 +71,11 @@ route.delete(
   }
 );
 
-route.patch("/addProduct/:id", async (req, res) => {
+route.patch("/addProduct/:id",verifyAccessToken, async (req, res) => {
   try {
     const { productId, quantity } = req.body;
     const basket = await Basket.findById(req.params.id);
+    if (!basket) res.sendStatus(404);
 
     basket.products.push({
       productId: productId,
@@ -83,7 +84,6 @@ route.patch("/addProduct/:id", async (req, res) => {
 
     await basket.save();
     res.sendStatus(200);
-
   } catch (err) {
     res.send(err);
     console.error(err);
